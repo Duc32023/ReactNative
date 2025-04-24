@@ -1,21 +1,45 @@
 buildscript {
     ext {
-        buildToolsVersion = "35.0.0"
+        buildToolsVersion = "33.0.2"
         minSdkVersion = 24
-        compileSdkVersion = 35
-        targetSdkVersion = 35
-        ndkVersion = "27.1.12297006"
-        kotlinVersion = "2.0.21"
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        ndkVersion = "25.2.9519653" // Đảm bảo NDK này đã được cài đặt
+        kotlinVersion = "1.8.20"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("com.android.tools.build:gradle:8.1.1") // Gradle Plugin
+        classpath("com.facebook.react:react-native-gradle-plugin") // React Native Plugin
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20") // Kotlin Plugin
     }
 }
 
-apply plugin: "com.facebook.react.rootproject"
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "$rootDir/../node_modules/react-native/android" }
+        maven { url "$rootDir/../node_modules/jsc-android/dist" }
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

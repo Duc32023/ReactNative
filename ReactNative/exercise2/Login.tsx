@@ -11,9 +11,9 @@ import {
   
 } from 'react-native';
 
-import { Icon } from 'react-native-vector-icons/Icon';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TextInput } from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 const Login = ()=> {
 
     const [email, setEmail] = useState('');
@@ -23,9 +23,8 @@ const Login = ()=> {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = () => {
-        let valid = true;
-    
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let valid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
       if (!email) {
         setEmailError('Bạn chưa nhập email');
@@ -37,20 +36,27 @@ const Login = ()=> {
         setEmailError('');
       }
     
+      if (!password) {
+        setPasswordError('Bạn chưa nhập password');
+        valid = false;
+      } else {
+        setPasswordError('');
+      }
     
-        if (!password) {
-          setPasswordError('Bạn chưa nhập password');
-          valid = false;
-        } else {
-          setPasswordError('');
-        }
+      if (valid) {
+        console.log('Email:', email);
+        console.log('Password:', password);
+        Alert.alert('Thành công', 'Đăng nhập thành công!');
+      }
+    };
     
-        if (valid) {
-          console.log('Email:', email);
-          console.log('Password:', password);
-          Alert.alert('Thành công', 'Thành công!');
-        }
-      };
+    const handleForgotPassword = () => {
+      console.log('Chuyển đến màn hình quên mật khẩu');
+    };
+    
+    const handleCreateAccount = () => {
+      console.log('Chuyển đến màn hình đăng ký');
+    };
 
 
     return (

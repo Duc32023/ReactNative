@@ -11,9 +11,9 @@ import {
   
 } from 'react-native';
 
-import { Icon } from 'react-native-vector-icons/Icon';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TextInput } from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 const Register = ()=> {
 
     const [email, setEmail] = useState('');
@@ -25,9 +25,8 @@ const Register = ()=> {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
-    const handleLogin = () => {
+    const handleRegister = () => {
       let valid = true;
-    
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
       if (!email) {
@@ -57,12 +56,15 @@ const Register = ()=> {
         setConfirmPasswordError('');
       }
     
-      // Chỉ báo thành công nếu tất cả hợp lệ
       if (valid) {
         console.log('Email:', email);
         console.log('Password:', password);
-        Alert.alert('Thành công', 'Đăng kí thành công!');
+        Alert.alert('Thành công', 'Đăng ký thành công!');
       }
+    };
+    
+    const handleGoBackToLogin = () => {
+      console.log('Quay lại màn hình đăng nhập');
     };
     
     
@@ -120,10 +122,10 @@ const Register = ()=> {
 {confirmPasswordError ? <Text style={styles.errorText}>{confirmPasswordError}</Text> : null}
 
            
-              <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+              <TouchableOpacity style={styles.loginBtn} onPress={handleRegister}>
                          <Text style={styles.loginBtnText}>Signup</Text>
                      </TouchableOpacity>
-        <TouchableOpacity style={styles.createBtn} onPress={handleLogin}>
+        <TouchableOpacity style={styles.createBtn} onPress={handleGoBackToLogin}>
             <Text style={styles.registerBtnText}>Already have an account?</Text>
         </TouchableOpacity>
 

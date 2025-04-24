@@ -11,9 +11,9 @@ import {
   
 } from 'react-native';
 
-import { Icon } from 'react-native-vector-icons/Icon';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TextInput } from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 const ForgetPassword = ()=> {
 
     const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ const ForgetPassword = ()=> {
     const [emailError, setEmailError] = useState('');
    
 
-    const handleLogin = () => {
+    const handleResetPassword = () => {
         let valid = true;
       
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,10 +62,10 @@ const ForgetPassword = ()=> {
             />
             {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
            
-             <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+             <TouchableOpacity style={styles.loginBtn} onPress={handleResetPassword}>
                                      <Text style={styles.loginBtnText}>Enter Reset Email</Text>
                                  </TouchableOpacity>
-                    <TouchableOpacity style={styles.createBtn} onPress={handleLogin}>
+                    <TouchableOpacity style={styles.createBtn} onPress={handleResetPassword}>
                         <Text style={styles.registerBtnText}>Go back to login</Text>
                     </TouchableOpacity>
         </View>
